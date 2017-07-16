@@ -69,7 +69,8 @@ Project located at <https://github.com/benblazak/ergodox-firmware>
     keyboard_report->mods == (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)) \
 )
 
-
+#define MOUSEKEY_DELAY 225
+#define MOUSEKEY_INTERVAL 25
 
 /*
  * Feature disable options

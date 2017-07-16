@@ -4,28 +4,28 @@
 static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 0 : default
         // left hand
-        EQL, 1,   2,   3,   4,   5,   FN2,
-        BSLS,Q,   W,   E,   R,   T,   FN1,
-        TAB, A,   S,   D,   F,   G,
-        LSFT,Z,   X,   C,   V,   B,   FN1,
-        LGUI,GRV, BSLS,LEFT,LALT,
-                                      MUTE,VOLU,
+        RBRC,1,   2,   3,   4,   5,   FN2,
+        TAB, Q,   W,   E,   R,   T,   MYCM,
+        CAPS,A,   S,   D,   F,   G,
+        LSFT,Z,   X,   C,   V,   B,   ENT,
+        LGUI,GRV, PGDN,PGUP,LALT,
+                                      FN8, VOLU,
                                            VOLD,
                                  FN7, FN1, ESC,
         // right hand
              FN3, 6,   7,   8,   9,   0,   MINS,
-             LBRC,Y,   U,   I,   O,   P,   LBRC,
+             BSPC,Y,   U,   I,   O,   P,   LBRC,
                   H,   J,   K,   L,   SCLN,QUOT,
              ENT, N,   M,   COMM,DOT, SLSH,RSFT,
                        RALT,LEFT,DOWN,UP,  RGHT,
-        RALT,RCTL,
-        PGUP,
-        FN5, FN1, SPC
+        MUTE,FN8,
+		FN5,
+        TAB, FN1, SPC
     ),
 
     KEYMAP(  // layer 1 : function and symbol keys
         // left hand
-        TRNS,F1,  F2,  F3,  F4,  F5,  F11,
+        TRNS,F1,  F2,  F3,  F4,  F5,  F6,
         TRNS,PGUP,BSPC,UP,  DEL, PGDN,FN4,
         TRNS,HOME,LEFT,DOWN,RGHT,END,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -34,8 +34,8 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            TRNS,
                                  FN7, TRNS,TRNS,
         // right hand
-             F12, F6,  F7,  F8,  F9,  F10, FN3,
-             TRNS,TRNS,7,   8,   9,   TRNS,TRNS,
+             F7,  F8,  F9,  F10, F11, F12, FN3,
+             TRNS,MINS,7,   8,   9,   TRNS,TRNS,
                   DOT, 4,   5,   6,   ESC, TRNS,
              TRNS,0,   1,   2,   3,   TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -46,7 +46,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     KEYMAP(  // layer 2 : keyboard functions
         // left hand
-        FN0, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN0,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -86,6 +86,27 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         FN6, INT3,MENU
     ),
 
+    KEYMAP(  // layer 4: mouse
+        // left hand
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,BTN1,BTN2,BTN3,TRNS,TRNS,
+        TRNS,MS_L,MS_D,MS_U,MS_R,TRNS,
+        TRNS,WH_L,WH_D,WH_U,WH_R,ACL1,ACL2,
+        TRNS,TRNS,TRNS,TRNS,ACL0,
+                                      TRNS,TRNS,
+                                           TRNS,
+                                 TRNS,TRNS,TRNS,
+        // right hand
+             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+             TRNS,TRNS,BTN1,BTN2,BTN3,TRNS,TRNS,
+                  TRNS,MS_L,MS_D,MS_U,MS_R,TRNS,
+             ACL0,ACL1,WH_L,WH_D,WH_U,WH_R,TRNS,
+                       ACL2,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,
+        TRNS,
+        TRNS,TRNS,TRNS
+    ),
+
 };
 
 /* id for user defined functions */
@@ -108,6 +129,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_FUNCTION(START_STENO),
     ACTION_FUNCTION(END_STENO),
 	ACTION_FUNCTION(LCTRL_BSPACE),
+    ACTION_LAYER_MOMENTARY(4),                      // FN1 - switch to Layer1
 };
 
 void action_function(keyrecord_t *event, uint8_t id, uint8_t opt) {
