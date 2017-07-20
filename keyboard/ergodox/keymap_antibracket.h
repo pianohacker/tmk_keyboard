@@ -5,16 +5,16 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 0 : default
         // left hand
         RBRC,1,   2,   3,   4,   5,   FN2,
-        TAB, Q,   W,   E,   R,   T,   MYCM,
-        CAPS,A,   S,   D,   F,   G,
+        CAPS, Q,   W,   E,   R,   T,   MYCM,
+        ESC, A,   S,   D,   F,   G,
         LSFT,Z,   X,   C,   V,   B,   ENT,
         LGUI,GRV, PGDN,PGUP,LALT,
                                       FN8, VOLU,
                                            VOLD,
-                                 FN7, FN1, ESC,
+                                 FN7, FN1, FN9,
         // right hand
              FN3, 6,   7,   8,   9,   0,   MINS,
-             BSPC,Y,   U,   I,   O,   P,   LBRC,
+             BSPC,Y,   U,   I,   O,   P,   CAPS,
                   H,   J,   K,   L,   SCLN,QUOT,
              ENT, N,   M,   COMM,DOT, SLSH,RSFT,
                        RALT,LEFT,DOWN,UP,  RGHT,
@@ -115,6 +115,7 @@ enum function_id {
 	START_STENO,
 	END_STENO,
 	LCTRL_BSPACE,
+	SHIFT_TAB,
 };
 
 /*
@@ -130,6 +131,7 @@ static const uint16_t PROGMEM fn_actions[] = {
     ACTION_FUNCTION(END_STENO),
 	ACTION_FUNCTION(LCTRL_BSPACE),
     ACTION_LAYER_MOMENTARY(4),                      // FN1 - switch to Layer1
+	ACTION_FUNCTION(SHIFT_TAB),
 };
 
 void action_function(keyrecord_t *event, uint8_t id, uint8_t opt) {
@@ -176,6 +178,20 @@ void action_function(keyrecord_t *event, uint8_t id, uint8_t opt) {
 				del_mods(MOD_BIT(KC_LCTRL));
 			}
 			send_keyboard_report();
+			break;
+
+		case SHIFT_TAB:
+			if (event->event.pressed) {
+				add_key(KC_TAB);
+				add_mods(MOD_BIT(KC_LSHIFT));
+			} else {
+				del_key(KC_TAB);
+			}
+			send_keyboard_report();
+
+			if (event->event.pressed) {
+				del_mods(MOD_BIT(KC_LSHIFT));
+			}
 			break;
     }
 }
